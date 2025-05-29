@@ -1,19 +1,19 @@
-import os
 from flask import Flask, Response, abort, request
+from flask_cors import CORS
+import os
 
 app = Flask(__name__)
+CORS(app)  # permite todas as origens (use isso para testes)
 
 VALID_TOKEN = "p0o9i8U&"
 
 @app.route("/pdf")
 def serve_pdf():
     auth_header = request.headers.get("Authorization")
-
     if not auth_header or not auth_header.startswith("Bearer "):
         return abort(401, description="Token de autenticação ausente")
 
     token = auth_header.split("Bearer ")[1]
-
     if token != VALID_TOKEN:
         return abort(403, description="Token inválido")
 
