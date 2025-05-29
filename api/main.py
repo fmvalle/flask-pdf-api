@@ -5,6 +5,8 @@ app = Flask(__name__)
 
 PDF_FILE_PATH = os.path.abspath("pdfs/matematica_paginas_1_a_26.pdf")
 
+print("Caminho absoluto do PDF:", PDF_FILE_PATH)
+
 @app.route("/pdf")
 def serve_pdf():
     try:
